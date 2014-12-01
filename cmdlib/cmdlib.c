@@ -160,7 +160,7 @@ _create_events
         if (NULL == (inEvent = CreateEventA(NULL, FALSE, FALSE, NULL))  ||
             NULL == (outEvent = CreateEventA(NULL, FALSE, FALSE, NULL)) ||
             NULL == (stopEvent = CreateEventA(NULL, TRUE, FALSE, NULL)) ||
-            NULL == (keepAlive = CreateEventA(NULL,TRUE,FALSE,NULL))    ||
+            NULL == (keepAlive = CreateEventA(NULL,FALSE,FALSE,NULL))    ||
             NULL == (inMutex = CreateMutexA(NULL,FALSE,NULL)))
         {
             //err already set
