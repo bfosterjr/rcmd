@@ -36,7 +36,7 @@ rcmd_server_start
     PCHAR  port
 );
 
-
+RCMD_EXPORT
 ULONG
 RCMD_API
 rcmd_client_start
