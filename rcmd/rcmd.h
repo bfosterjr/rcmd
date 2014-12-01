@@ -8,7 +8,7 @@
 #define RCMD_EXPORT
 #endif
 
-#define RCMD_API                __stdcall
+#define RCMD_API                __cdecl
 
 #define MAX_CMD_LEN             0x1000
 
