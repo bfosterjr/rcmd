@@ -94,17 +94,34 @@ _create_send_recv_threads
     HANDLE  wait_objs[2]    = { 0 };
     DWORD   threadId        = 0;
 
-
-    if (NULL == (hThreadSend = CreateThread(NULL, 0, _send_thread_f, (PVOID)connectSocket, 0, &threadId)) ||
-        NULL == (hThreadRecv = CreateThread(NULL, 0, _recv_thread_f, (PVOID)connectSocket, 0, &threadId)))
+    __try
     {
+        if (NULL == (hThreadSend = CreateThread(NULL, 0, _send_thread_f, (PVOID)connectSocket, 0, &threadId)) ||
+            NULL == (hThreadRecv = CreateThread(NULL, 0, _recv_thread_f, (PVOID)connectSocket, 0, &threadId)))
+        {
+        }
+        else
+        {
+            wait_objs[0] = hThreadRecv;
+            wait_objs[1] = hThreadSend;
+            WaitForMultipleObjects(2, wait_objs, TRUE, INFINITE);
+            retVal = TRUE;
+        }
     }
-    else
+    __finally
     {
-        wait_objs[0] = hThreadRecv;
-        wait_objs[1] = hThreadSend;
-        WaitForMultipleObjects(2, wait_objs, TRUE, INFINITE);
-        retVal = TRUE;
+        if (NULL != hThreadSend)
+        {
+            TerminateThread(hThreadSend, 0);
+            CloseHandle(hThreadSend);
+            hThreadSend = NULL;
+        }
+        if (NULL != hThreadRecv)
+        {
+            TerminateThread(hThreadRecv, 0);
+            CloseHandle(hThreadRecv);
+            hThreadRecv = NULL;
+        }
     }
     return retVal;
 }

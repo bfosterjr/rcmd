@@ -34,6 +34,8 @@ BOOL WINAPI DllMain(
 
 #else
 
+#ifndef BUILD_LIB
+
 #include <stdio.h>
 #include "Xgetopt.h"
 
@@ -96,5 +98,5 @@ int main(int argc, char** argv)
         _print_usage();
     }
 }
-
+#endif
 #endif

@@ -6,7 +6,7 @@ RCMD is a simple remote command shell application which can act as both the clie
 
 See: [http://msdn.microsoft.com/en-us/library/windows/desktop/ms682499(v=vs.85).aspx](http://msdn.microsoft.com/en-us/library/windows/desktop/ms682499(v=vs.85).aspx)
 
-RCMD can be built as both a standalone application or as a DLL to be used in other applications.
+RCMD can be built as a standalone application, DLL, or as a static library to be used in other applications.
 
 ## Platforms ##
 
